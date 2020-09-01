@@ -1,27 +1,20 @@
 class Solution {
-public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        if(nums.size() == 1) {
-            vector<vector<int>> v = {{nums[0]}};
-            return v;
-        }
-        vector<vector<int>> a;
-        for(int i = 0; i < nums.size(); ++i) {
-            vector<int> b;
-            for(int j = 0; j < nums.size(); ++j) {
-                if(j == i)
-                    continue;
-                b.push_back(nums[j]);
-            }
-            vector<vector<int>> c = permute(b);
-            for(int j = 0; j < c.size(); ++j) {
-                vector<int> p = c[j];
-                vector<int> d = {nums[i]};
-                for(int k = 0; k < p.size(); ++k)
-                    d.push_back(p[k]);
-                a.push_back(d);
-            }
-        }
-        return a;
-    }
-};
+	public List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> list = new ArrayList<>();
+		backtrack(list, new ArrayList<>(), nums);
+		return list;
+	}
+	private void backtrack(List<List<Integer>> list, List<Integer> tmp, int [] nums){
+		if(tmp.size() == nums.length) { // base case
+			list.add(new ArrayList<>(tmp));
+			return;
+		}
+		for(int i = 0; i < nums.length; i++) { 
+			if(tmp.contains(nums[i]))
+				continue;
+			tmp.add(nums[i]);
+			backtrack(list, tmp, nums);
+			tmp.remove(tmp.size() - 1);
+		}
+	}
+}
