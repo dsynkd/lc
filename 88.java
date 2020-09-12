@@ -1,6 +1,5 @@
 class Solution {
-public:
-    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+    public void merge(int[] A, int m, int[] B, int n) {
         int i = m-1;
 		int j = n-1;
 		int k = m+n-1;
@@ -14,4 +13,4 @@ public:
 		while(j >= 0)
 			A[k--] = B[j--];
     }
-};
+}
